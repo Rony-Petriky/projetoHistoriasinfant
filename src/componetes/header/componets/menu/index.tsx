@@ -42,7 +42,7 @@ export function Menu(){
     right-0 
     h-screen       // Altura total da tela (100vh)
     w-1/2          // Largura de 50% (metade da tela)
-    bg-gray-800    // Cor de fundo
+    bg-black   // Cor de fundo
     text-white     // Cor do texto
     shadow-2xl     // Sombra para dar profundidade
     z-50           // Garante que fique acima de outros elementos
@@ -69,10 +69,10 @@ export function Menu(){
 
           <nav className={drawerClasses}>
               <ul className=" flex flex-col w-full mx-auto list-none pt-5 text-left pl-5">
-              <li className=" pb-3"><Link className="text-white font-medium text-lg flex flex-row items-center" href="#/"><FaHome/>  <h1 className="pl-3">INICIO </h1></Link></li>
-              <li className=" pb-3"><Link className="text-white font-medium text-lg flex flex-row items-center" href="#histoias"> <ImBook/><h1 className="pl-3">HISTORIAS</h1></Link></li>
-              <li className=" pb-3"><Link className="text-white  font-medium text-lg flex flex-row items-center" href="#sobre nos"><GiMustache/><h1 className="pl-3">SOBRE NOS</h1></Link></li>
-              <li className=" pb-3"><Link className="text-white  font-medium text-lg flex flex-row items-center" href="#contato"><BsFillTelephoneFill/><h1 className="pl-3">CONTATO</h1></Link></li>
+              <li className=" pb-3"><Link className="text-white font-medium text-lg flex flex-row items-center" href="/home"><FaHome/>  <h1 className="pl-3">INICIO </h1></Link></li>
+              <li className=" pb-3"><Link className="text-white font-medium text-lg flex flex-row items-center" href="historias"> <ImBook/><h1 className="pl-3">HISTORIAS</h1></Link></li>
+              <li className=" pb-3"><Link className="text-white  font-medium text-lg flex flex-row items-center" href="sobre nos"><GiMustache/><h1 className="pl-3">SOBRE NOS</h1></Link></li>
+              <li className=" pb-3"><Link className="text-white  font-medium text-lg flex flex-row items-center" href="contato"><BsFillTelephoneFill/><h1 className="pl-3">CONTATO</h1></Link></li>
               <li className="pb-3" ><button className="font-medium text-white text-lg flex flex-row items-center" onClick={()=>{}} >SAIR</button></li>
               </ul>
           </nav>
@@ -80,10 +80,10 @@ export function Menu(){
       </div>
     ):( <nav>
         <ul className="list-none flex space-x-6 m-0 p-0">
-            <li><Link className="text-white font-bold hover:text-blue-200 text-lg" href="#/">INICIO</Link></li>
-            <li><Link className="text-white font-bold hover:text-blue-200 text-lg" href="#histoias">HISTORIAS</Link></li>
-            <li><Link className="text-white font-bold hover:text-blue-200 text-lg" href="#sobre nos">SOBRE NOS</Link></li>
-            <li><Link className="text-white font-bold hover:text-blue-200 text-lg" href="#contato">CONTATO</Link></li>
+            <li><Link className="text-white font-bold hover:text-blue-200 text-lg" href="/home">INICIO</Link></li>
+            <li><Link className="text-white font-bold hover:text-blue-200 text-lg" href="historias">HISTORIAS</Link></li>
+            <li><Link className="text-white font-bold hover:text-blue-200 text-lg" href="sobre nos">SOBRE NOS</Link></li>
+            <li><Link className="text-white font-bold hover:text-blue-200 text-lg" href="contato">CONTATO</Link></li>
             <li className="text-white font-bold hover:text-blue-200 text-lg" onClick={()=>{}}>SAIR</li>
 
         </ul>
