@@ -11,6 +11,10 @@ import image2 from "@/assets/images/carrossel/carousel-2.svg"
 import image3 from "@/assets/images/carrossel/carousel-3.svg"
 import image4 from "@/assets/images/carrossel/carousel-4.svg"
 import image5 from "@/assets/images/carrossel/carousel-5.svg"
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import prismaClient from "@/lib/prisma"
 
 const histoias = [
   { id: '1', titulo: 'Filme 1', urlImage: image1, descricao:"uma historia cheia de AVENTURAS uma historia cheia de AVENTURAS" },
@@ -22,7 +26,20 @@ const histoias = [
 ];
 
 const SLIDES = Array.from(Array(5).keys())
-export default function Home() {
+export default async function Home() {
+
+      const session = await getServerSession(authOptions);
+      // Redireciona se o usuário estiver logado
+      if (!session || !session.user) {
+      redirect("/");
+      }
+
+      const historia = await prismaClient.historia.findMany({
+        where:{
+            tipo: "aventura"
+        }
+    })
+    console.log(historia)
   return (
     <div>
         <Container>       
@@ -42,8 +59,8 @@ export default function Home() {
                 />
                 </div>
              </div> */}
-              <Carrossel historias={[...histoias]}/>
-             <MainCorpo/>
+              <Carrossel historias={[...historia]}/>
+             <MainCorpo historias={[...historia]}/>
 
 
         </Container>

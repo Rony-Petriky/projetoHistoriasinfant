@@ -6,11 +6,13 @@ import { MdOutlineKeyboardArrowRight, MdOutlineKeyboardArrowLeft } from "react-i
 import useWindowDimensions from '@/componetes/tamanhotela'; // Ajuste o caminho
 import { Divolorida } from "../diccolorida";
 import type { StaticImageData } from 'next/image';
+import Link from "next/link";
+import { set } from "zod";
 
 
 interface historia {
     id:string,
-    urlImage: StaticImageData,
+    srcCapaMiniatura: string,
     titulo: string,
     descricao: string
 }
@@ -20,6 +22,18 @@ interface historiaProps{
 }
 
 export function Rolagem({titulo, historias}: historiaProps){
+    const [ehistorias, setihistorias] = useState<typeof historias>([])
+
+    useEffect(() => {
+    function embaralharLista<T>(array: T[]): T[] {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); // índice aleatório
+        [array[i], array[j]] = [array[j], array[i]]; // troca os elementos
+      }
+      return array;
+    }
+    const historiasEmbaralhadas = embaralharLista(historias) as []
+    setihistorias(historiasEmbaralhadas)}, [])
 
 
     const { width, height } = useWindowDimensions();
@@ -162,15 +176,17 @@ export function Rolagem({titulo, historias}: historiaProps){
                             ">
                 <ul  className=" flex h-full flex-row justify-between items-center flex-nowrap w-max">
                     
-                    {historias.map( (historia) => (    
+                    {ehistorias.map( (historia) => (    
                             <li key={historia.id} >
-
+                                  <Link href={`/story/${historia.id}`} >
                                     <Divolorida>
                                           <Image
                                               className="object-cover w-full h-56 md:h-[264px] 
                                               "
-                                              src={historia.urlImage}
+                                              src={historia.srcCapaMiniatura}
                                               alt={historia.descricao}
+                                              width={400}
+                                              height={400}
                                               
                                           />
                                           <div className="py-1 text-center">
@@ -178,6 +194,7 @@ export function Rolagem({titulo, historias}: historiaProps){
                                           <p className=" px-1 text-[10px] text-start text-gray-700 dark:text-gray-200">{historia.descricao}</p>
                                           </div>
                                     </Divolorida>
+                                  </Link>
                                                      
                             </li>     
                     ))}

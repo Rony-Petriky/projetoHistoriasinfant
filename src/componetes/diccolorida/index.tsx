@@ -69,6 +69,7 @@ export function Divolorida({children}:{children : ReactNode}){
         className={`
                 mx-2
                 w-[212]
+                h-[352]
                 rouded
                 overflow-hidden 
                 rounded-lg 

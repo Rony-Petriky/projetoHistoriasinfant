@@ -2,22 +2,35 @@
 import TimedAudioPlayer from "@/componetes/sombotao";
 
 
-interface Botao {
-  id:string,
-  image:string,
-  som:string
+type Botao = {
+  id: string
+  nome: string
+  srcImagem: string
+  srcSom: string
+  status: string
+  createdAt: Date
+  updatedAt: Date
 }
-type HistProps = {
-  playForSeconds : number,
-  botoes: Botao[]
+
+type HistoriaBotao = {
+  id: string
+  createdAt: Date
+  historiaId: string
+  botaoId: string
+  botao: Botao
 }
-export function CampBotoes({botoes, playForSeconds}: HistProps){
-   
+
+interface CampBotoesProps {
+  botoes: HistoriaBotao[]
+  playForSeconds: number
+}
+export function CampBotoes({botoes, playForSeconds}: CampBotoesProps){
+  console.log(botoes)
     return(
-        <div className="nd:w-64 w-54 md:h-52 h-44 rounded-2xl p-5 bg-amber-500 flex justify-around">
+        <div className="nd:w-64 w-54 md:h-52 h-44 rounded-2xl  flex-wrap p-5 bg-amber-500 flex justify-around">
           {botoes.map((botao) => (
                 <div key={botao.id}>
-                  <TimedAudioPlayer srcImage={botao.image} playForSeconds={playForSeconds} srcSom={botao.som}/>
+                  <TimedAudioPlayer srcImage={botao.botao.srcImagem} playForSeconds={playForSeconds} srcSom={botao.botao.srcSom}/>
         </div>
           ))}
    

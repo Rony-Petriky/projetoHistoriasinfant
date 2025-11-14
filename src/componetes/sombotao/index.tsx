@@ -96,12 +96,12 @@ useEffect(() => {
 
     },[isPlaying])
   return (
-    <div>
+    <div className='px-2'>
       <button  onClick={handlePlay} className={`${corCinza}`} >
         <Image 
         src={srcImage}
-        width={52}
-        height={52}
+        width={42}
+        height={42}
         alt='...'
         />
       </button>

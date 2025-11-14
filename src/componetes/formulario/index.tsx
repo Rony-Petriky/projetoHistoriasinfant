@@ -4,7 +4,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { relative } from "path";
+import { FcGoogle } from "react-icons/fc";
+import { signIn } from "next-auth/react";
 
 const schema = z.object({
   name: z.string().min(2, "Nome muito curto"),
@@ -120,6 +121,12 @@ export default function UserForm() {
                     className="bg-indigo-500 text-white py-2 rounded hover:bg-indigo-600 transition"
                 >
                     Cadastrar
+                </button>
+                    <button className="flex flex-row justify-center items-center w-full rounded p-2 border-1"
+                    onClick={() => signIn("google")}
+                    type="button"
+                    >
+                    <FcGoogle/> <p className="pl-2">GOOGLE</p>
                 </button>
 
 

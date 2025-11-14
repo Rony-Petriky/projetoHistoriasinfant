@@ -7,10 +7,11 @@ import React, { useState, useEffect, useCallback } from 'react'
 import useEmblaCarousel from 'embla-carousel-react'
 import type { EmblaOptionsType } from 'embla-carousel'
 import Autoplay from 'embla-carousel-autoplay'
+import Link from "next/link";
 
 interface historia {
     id:string,
-    urlImage: StaticImageData,
+    srcBanner: string,
     titulo: string,
     descricao: string
 }
@@ -70,6 +71,7 @@ export const Carrossel: React.FC<Props> = ({ historias, options }) => {
   }, [emblaApi])
 
   return (
+    
     <div className="relative w-full rounded-full shadow-xl/20 mx-auto pt-3">
       {/* O 'viewport' do Embla que esconde o overflow */}
       <div className="overflow-hidden" ref={emblaRef}>
@@ -82,15 +84,20 @@ export const Carrossel: React.FC<Props> = ({ historias, options }) => {
             // 'flex-none' previne o slide de encolher
             // 'w-full' faz cada slide ocupar 100% do viewport
             // 'min-w-0' é importante para o flexbox funcionar corretamente
+
             <div 
               className="flex-none rounded-full w-full min-w-0 aspect-video" 
               key={historia.id}
             >
+            <Link href={`/story/${historia.id}`} >
+
               <div className=" relative  flex bg-white  items-center justify-center w-full h-full rounded-3xl">
                 <Imag
                 className="rounded-4xl w-full"
-                src={historia.urlImage}
-                alt={historia.descricao}/>
+                src={historia.srcBanner}
+                alt={historia.descricao}
+                fill/>
+          
                 
                 <div className="brightness-50  absolute w-[400px] bg-black blur-2xl bottom-0 left-0 p-5">
                     <h1 className="font-bold text-white pt-1  text-3xl">{historia.titulo}</h1>
@@ -102,6 +109,7 @@ export const Carrossel: React.FC<Props> = ({ historias, options }) => {
                 </div>
                
               </div>
+            </Link>
             </div>
           ))}
         </div>
@@ -131,6 +139,7 @@ export const Carrossel: React.FC<Props> = ({ historias, options }) => {
         </svg>
       </button>
     </div>
+   
   )
 }
 

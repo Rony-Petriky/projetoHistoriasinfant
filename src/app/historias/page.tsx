@@ -6,6 +6,9 @@ import image2 from "@/assets/images/carrossel/carousel-2.svg"
 import image3 from "@/assets/images/carrossel/carousel-3.svg"
 import image4 from "@/assets/images/carrossel/carousel-4.svg"
 import image5 from "@/assets/images/carrossel/carousel-5.svg"
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { redirect } from "next/navigation";
 
 const histoias = [
   { id: '1', titulo: 'Filme 1', urlImage: image1, descricao:"uma historia cheia de AVENTURAS uma historia cheia de AVENTURAS" },
@@ -17,7 +20,12 @@ const histoias = [
 ];
 
 const SLIDES = Array.from(Array(5).keys())
-export default function historias(){
+export default async function historias(){
+    const session = await getServerSession(authOptions);
+    // Redireciona se o usuário estiver logado
+    if (!session || !session.user) {
+    redirect("/");
+    }
     return(
         <Container>
             <Carrossel historias={[...histoias]}/>
